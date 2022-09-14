@@ -1,24 +1,32 @@
 import React from 'react';
+import {BrowserRouter,Route,Routes} from "react-router-dom";
+import ListCar from './components/ListCar';
 import LoginPage from './components/LoginPage';
 import SignUp from './components/SignUp';
-//import IndexFilter from './components/indexFilter';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import {BrowserRouter,Route,Routes} from "react-router-dom";
+import Menu from './components/Menu';
+import IndexFilter from './components/indexFilter';
+
+
 
 
 function App() {
-  return (
+  return ( 
     <BrowserRouter>
-        <div className="App">
+      <div>
         <Header/>
-        <SignUp/>
+        <Menu/>
+        <Routes>
+          <Route exact path="/" element={<IndexFilter/>}></Route>
+          <Route exact path="/SignUp" element={<SignUp/>}></Route>
+          <Route exact path="/Login" element={<LoginPage/>}></Route>
+          <Route exact path="/List" element={<ListCar/>}></Route>
+        </Routes>
         <Footer/>
       </div>
     </BrowserRouter>
   );
 }
-// <Routes>
-//         <Route exact path="/LoginPage" component={LoginPage} />
-//         </Routes>
+
 export default App;

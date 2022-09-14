@@ -36,10 +36,10 @@ async function Submit(e){
 }
 
 function SignUp(){
-    const [name, setName] = useState(null);
-    const [password,setPassword] = useState(null);
-    const [email, setEmail] = useState(null);
-    const [age,setAge] = useState(null);
+    const [name, setName] = useState(undefined);
+    const [password,setPassword] = useState(undefined);
+    const [email, setEmail] = useState(undefined);
+    const [age,setAge] = useState(undefined);
     
     const handleInputChange = (e) => {
         const {id , value} = e.target;
@@ -68,7 +68,7 @@ function SignUp(){
                 <button onClick={Submit}>Sign Up</button>
                 <br></br>
                 <p>Already have an account?</p>
-                <Link to='/LoginPage'>Log In</Link>
+                <Link to='/../Login'>Log In</Link>
             </form>
         </div>
     );
