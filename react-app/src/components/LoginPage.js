@@ -3,8 +3,16 @@ import axios from 'axios';
 
 async function Submit(e){
     e.preventDefault();
-    await axios.post('http://localhost:4000/users/login').then((respone)=>{
-        console.log(respone);
+    await axios.post('http://localhost:4000/users/login',{
+        email: document.getElementById("email").value,
+        password: document.getElementById("password").value
+    }).then((response)=>{
+        if(response.status=200){
+            console.log(response);
+            localStorage.setItem('User',JSON.stringify(response.data.user));
+            localStorage.setItem('Token',JSON.stringify(response.data.token));
+            window.location.href="/Profile";
+        } 
     }).catch((error)=>console.log(error));
 }
 

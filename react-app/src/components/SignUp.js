@@ -7,7 +7,7 @@ async function Submit(e){
     e.preventDefault();
     let age= document.getElementById('age').value;
     if(!age) age=0;
-    await axios.post('http://localhost:4000/users/signUp',{
+    await axios.post('http://localhost:4000/users',{
         email: document.getElementById('email').value,
         password:document.getElementById('password').value,
         age,

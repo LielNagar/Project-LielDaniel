@@ -4,10 +4,19 @@ import axios from 'axios';
 async function Submit(e){
     e.preventDefault();
     await axios.post('http://localhost:4000/vehicles',{
-        // carNumber: document.getElementById('email').value,
-        // manufacturer: document.getElementById('manufacturer').value,
+        description: document.getElementById('description').value,
+        manufacturer: document.getElementById('manufacturer').value,
         // model: document.getElementById('model').value,
-        // year: document.getElementById('year').value
+        // year: document.getElementById('year').value,
+        owner: JSON.parse(localStorage.getItem('User'))._id,
+        licensePlate: document.getElementById('licensePlate').value,
+        // sDate: document.getElementById('sDate').value,
+        // eDate: document.getElementById('eDate').value,
+        // duration: (eDate-sDate)/1000
+    },{
+        headers:{
+            Authorization: localStorage.getItem('Token')
+        }
     }).then((response)=>{
         console.log(response)
     }).catch((error)=>{
@@ -16,16 +25,16 @@ async function Submit(e){
 }
 
 export default function ListCar(){
-    const [carNumber, setCarNumber] = useState(undefined);
+    const [licencePlate, setLicensePlate] = useState(undefined);
     const [manufacturer,setManufacturer] = useState(undefined);
-    const [model, setModel] = useState(undefined);
+    const [description, setModel] = useState(undefined);
     const [year,setYear] = useState(undefined);
     
     
     const handleInputChange = (e) => {
         const {id , value} = e.target;
-        if(id === "carNumber"){
-            return setCarNumber(value);
+        if(id === "licensePlate"){
+            return setLicensePlate(value);
         }
         if(id === "manufacturer"){
             return setManufacturer(value);
@@ -41,10 +50,12 @@ export default function ListCar(){
     return(
         <div>
             <form>
-                <input id="carNumber" placeholder="Enter Car Number" onChange = {(e) => handleInputChange(e)} value={carNumber} required></input>
+                <input id="description" placeholder="description" onChange = {(e) => handleInputChange(e)} value={description} required></input>
+                <input id="licensePlate" placeholder="Enter Car Number" onChange = {(e) => handleInputChange(e)} value={licencePlate} required></input>
                 <input id="manufacturer" placeholder="Enter Manufacturer" onChange = {(e) => handleInputChange(e)} value={manufacturer} required></input>
-                <input id="model" placeholder="Enter Car Model" onChange = {(e) => handleInputChange(e)} value={model} required></input>
                 <input id="year" type="number" min="1900" max="2099" step="1" placeholder="Enter Year Of Creation" onChange = {(e) => handleInputChange(e)} value={year} required></input>
+                <input id="sDate" type="date"></input>
+                <input id="eDate" type="date"></input>
                 <button onClick={Submit}>List Your Car</button>
             </form>
         </div>

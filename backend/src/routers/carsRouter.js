@@ -1,5 +1,5 @@
 const express=require('express')
-const Car= require('../models/car')
+const Car = require('../models/car')
 const router= new express.Router()
 
 router.post('/cars', async (req,res)=>{

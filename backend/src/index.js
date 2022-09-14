@@ -1,8 +1,15 @@
 const express=require('express')
 require('./db/mongoose')
 const cors = require('cors');
+
+
+
+
+const vehicleRouter= require('./routers/vehicleRouter')
+const Vehicle = require('./models/vehicle');
+
 const userRouter= require('./routers/usersRouter')
-const carRouter= require('./routers/carsRouter')
+const User = require('./models/user1')
 
 const app=express()
 const port= process.env.PORT || 4000
@@ -15,7 +22,8 @@ app.use(
   ); 
 app.use(express.json())
 app.use(userRouter)
-app.use(carRouter)
+app.use(vehicleRouter)
+
 
 app.listen(port,()=>{
     console.log('Server is up on port', port)
