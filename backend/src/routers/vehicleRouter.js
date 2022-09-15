@@ -12,8 +12,8 @@ router.post('/vehicles' ,async (req, res) => {
 
     const vehicle = new Vehicle({
         ...req.body,
-        owner: req.body.owner
     })
+    
     try {
         await vehicle.save()
         res.status(201).send(vehicle)

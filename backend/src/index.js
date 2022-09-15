@@ -2,9 +2,6 @@ const express=require('express')
 require('./db/mongoose')
 const cors = require('cors');
 
-
-
-
 const vehicleRouter= require('./routers/vehicleRouter')
 const Vehicle = require('./models/vehicle');
 
