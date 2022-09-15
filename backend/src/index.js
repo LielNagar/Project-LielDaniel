@@ -9,7 +9,7 @@ const vehicleRouter= require('./routers/vehicleRouter')
 const Vehicle = require('./models/vehicle');
 
 const userRouter= require('./routers/usersRouter')
-const User = require('./models/user1')
+const User = require('./models/user')
 
 const app=express()
 const port= process.env.PORT || 4000
