@@ -13,10 +13,11 @@ import Profile from './components/Profile';
 
 
 function App() {
+  const user= localStorage.getItem('User')
   return ( 
     <BrowserRouter>
       <div>
-        <Header/>
+        <Header user={user}/>
         <Menu/>
         <Routes>
           <Route exact path="/" element={<IndexFilter/>}></Route>
