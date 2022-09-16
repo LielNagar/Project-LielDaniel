@@ -5,10 +5,17 @@ async function Submit(e){
 
     e.preventDefault();
     await axios.post('http://localhost:4000/vehicles',{
+<<<<<<< HEAD
 
         description: document.getElementById('description').value,
         manufacturer: document.getElementById('manufacturer').value,
 	owner: JSON.parse(localStorage.getItem('User'))._id,
+=======
+        
+        description: document.getElementById('description').value,
+        manufacturer: document.getElementById('manufacturer').value,
+        owner: JSON.parse(localStorage.getItem('User'))._id,
+>>>>>>> bc20cd86420a7f64803aab6e367149b714f20977
         licensePlate: document.getElementById('licensePlate').value,
         engineSize: document.getElementById('engineSize').value,
         engineType: document.getElementById('engineType').value,
@@ -30,6 +37,7 @@ async function Submit(e){
             // LIEL SIM PO LEV
         // sDate: document.getElementById('sDate').value,
         // eDate: document.getElementById('eDate').value,
+<<<<<<< HEAD
 	// duration: (eDate-sDate)/1000,
         // carURL: document.getElementById('carURL'),
 
@@ -37,6 +45,15 @@ async function Submit(e){
 
     },{
  	// headers:{
+=======
+        // duration: (eDate-sDate)/1000,
+        // carURL: document.getElementById('carURL'),
+
+
+       
+    },{
+        // headers:{
+>>>>>>> bc20cd86420a7f64803aab6e367149b714f20977
         //     Authorization: localStorage.getItem('Token')
         // }
     }).then((response)=>{
@@ -66,9 +83,15 @@ export default function ListCar(){
 
 
 
+<<<<<<< HEAD
 
 
 
+=======
+    
+    
+    
+>>>>>>> bc20cd86420a7f64803aab6e367149b714f20977
     const handleInputChange = (e) => {
         const {id , value} = e.target;
         if(id === "licensePlate"){

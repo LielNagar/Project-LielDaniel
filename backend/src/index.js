@@ -2,14 +2,11 @@ const express=require('express')
 require('./db/mongoose')
 const cors = require('cors');
 
-
-
-
 const vehicleRouter= require('./routers/vehicleRouter')
 const Vehicle = require('./models/vehicle');
 
 const userRouter= require('./routers/usersRouter')
-const User = require('./models/user1')
+const User = require('./models/user')
 
 const app=express()
 const port= process.env.PORT || 4000
@@ -24,6 +21,7 @@ app.use(express.json())
 app.use(userRouter)
 app.use(vehicleRouter)
 
+console.log("bdika")
 
 app.listen(port,()=>{
     console.log('Server is up on port', port)
