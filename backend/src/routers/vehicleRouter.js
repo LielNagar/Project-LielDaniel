@@ -8,8 +8,7 @@ const mongoose= require('mongoose')
 
 // POST A NEW VEHICLE TO THE SITE ROUTE
 
-router.post('/vehicles' ,async (req, res) => {
-
+router.post('/vehicles', auth ,async (req, res) => {
     const vehicle = new Vehicle({
         ...req.body,
     })
@@ -20,7 +19,6 @@ router.post('/vehicles' ,async (req, res) => {
     } catch (e) {
         res.status(400).send(e)
     }
-
  })
 
 
