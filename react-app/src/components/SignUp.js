@@ -19,7 +19,10 @@ async function Submit(e){
                 'Your user assigned to the system and ready to use!',
                 'success'
             );
-        } 
+        }
+        localStorage.setItem('User',JSON.stringify(response.data.user));
+        localStorage.setItem('Token',JSON.stringify(response.data.token));
+        window.location.href='/Profile'; 
     }).catch((error)=>{
         console.log(error);
         if(error.response.data.errmsg){

@@ -36,15 +36,18 @@ async function Submit(e){
          eDate,
          duration: Math.ceil(Math.abs(eDate-sDate) / (1000 * 60 * 60 * 24)),
         // carURL: document.getElementById('carURL'),
-
-
-       
+        
     },{
         headers:{
             Authorization: 'Bearer '+ JSON.parse(localStorage.getItem('Token'))
         }
     }).then((response)=>{
-        console.log(response)
+        Swal.fire(
+            'Good job!',
+            'Your car has listed to the system and ready to be rent!',
+            'success'
+        );
+        window.location.href='/';
     }).catch((error)=>{
         Swal.fire({
             icon: 'error',

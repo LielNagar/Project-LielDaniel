@@ -8,9 +8,7 @@ import Footer from './components/Footer';
 import Menu from './components/Menu';
 import IndexFilter from './components/indexFilter';
 import Profile from './components/Profile';
-
-
-
+import AllVehicles from './components/AllVehicles';
 
 function App() {
   const user= localStorage.getItem('User')
@@ -26,6 +24,7 @@ function App() {
           <Route exact path="/Profile" element={<Profile/>}></Route>
           <Route exact path="/List" element={<ListCar/>}></Route>
         </Routes>
+        <AllVehicles/>
         <Footer/>
       </div>
     </BrowserRouter>

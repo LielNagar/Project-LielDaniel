@@ -1,7 +1,19 @@
 import React from "react";
 import {Link} from "react-router-dom";
+import axios from "axios";
 
 const Logout=()=>{
+    axios.post('http://localhost:4000/users/logoutAll',{
+
+    },{
+        headers:{
+            Authorization: 'Bearer '+ JSON.parse(localStorage.getItem('Token'))
+        }
+    }).then((response)=>{
+        console.log(response);
+    }).catch((error)=>{
+        console.log(error);
+    })
     localStorage.clear();
 }
 
