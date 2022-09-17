@@ -17,6 +17,7 @@ const vehicleScheme = new mongoose.Schema({
     },
     licensePlate: {
         type:String,
+        unique:true,
         required: true
     },
     sDate: {
