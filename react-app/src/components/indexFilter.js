@@ -8,7 +8,7 @@ const [startDate, setStartDate] = useState(new Date());
     <div>
         <DatePicker id="dateFrom" onChange={(date) => setStartDate(date)} placeholderText={'Select a pickup date'}/>
         <DatePicker id="dateTill" onChange={(date) => setStartDate(date)} placeholderText={'Select a return date'}/>
-        <select placeholderText={"Where you pick up the vehicle?"}>
+        <select>
             <option>liel</option>
             <option>liel</option>
             <option>liel</option>
