@@ -21,7 +21,7 @@ export default function Vehicle(props){
                     <td>{props.licensePlate}</td>
                     <td>{props.manufacturer}</td>
                     <td>{props.model}</td>
-                    <td><button>List Me!</button></td>
+                    <td><button>Rent Me!</button></td>
                 </tr>
             </table>
         </div>

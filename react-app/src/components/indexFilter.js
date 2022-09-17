@@ -6,8 +6,8 @@ const IndexFilter=()=>{
 const [startDate, setStartDate] = useState(new Date());
   return (
     <div>
-        <DatePicker id="dateFrom" onChange={(date) => setStartDate(date)} placeholderText={'Select a pickup date'}/>
-        <DatePicker id="dateTill" onChange={(date) => setStartDate(date)} placeholderText={'Select a return date'}/>
+        <DatePicker id="dateFrom" onChange={(date) => setStartDate(date)} placeholder='Select a pickup date'/>
+        <DatePicker id="dateTill" onChange={(date) => setStartDate(date)} placeholder='Select a return date'/>
         <select>
             <option>liel</option>
             <option>liel</option>

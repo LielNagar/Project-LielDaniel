@@ -24,7 +24,7 @@ router.post('/vehicles', auth ,async (req, res) => {
 
 // GET ALL USER VEHICLES LIST ROUTE
 
- // SOME OPTIONS
+// SOME OPTIONS
 // GET /vehicles?completed=false will get back the incomplete tasks
 // GET /vehicles?limit=10 for ten results &skip=0 for the first ten results 
 // GET /vehicles?sortBy=createdAt_des {field and then order}
@@ -75,6 +75,15 @@ router.get('/vehicles/:id' , auth , async (req, res) => {
     }
 
    
+})
+
+router.get('/vehicles/models', async(req,res)=>{
+    try{
+        const manufacutrers= await Vehicle.distinct("manufacturer")
+        res.send(manufacutrers)
+    }catch(e){
+        res.status(404).send()
+    }
 })
 
 
