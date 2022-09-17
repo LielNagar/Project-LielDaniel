@@ -6,7 +6,7 @@ import SignUp from './components/SignUp';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Menu from './components/Menu';
-import IndexFilter from './components/indexFilter';
+import IndexFilter from './components/IndexFilter';
 import Profile from './components/Profile';
 import AllVehicles from './components/AllVehicles';
 

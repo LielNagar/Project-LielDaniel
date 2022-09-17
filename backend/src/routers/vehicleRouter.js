@@ -76,16 +76,14 @@ router.get('/vehicles/:id' , auth , async (req, res) => {
 
    
 })
-
-router.get('/vehicles/models', async(req,res)=>{
+router.get('/vehicles/details/distinct', async(req,res)=>{
     try{
         const manufacutrers= await Vehicle.distinct("manufacturer")
         res.send(manufacutrers)
-    }catch(e){
-        res.status(404).send()
+    }catch(error){
+        res.status(404).send(error)
     }
 })
-
 
 // DELETE A LISTED VEHICLE ROUTE
 
