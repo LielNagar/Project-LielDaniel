@@ -3,6 +3,7 @@ const router = new express.Router()
 const auth = require('../middleware/auth')
 const Vehicle = require('../models/vehicle')
 const mongoose= require('mongoose')
+const { response } = require('express')
 
 // VEHICLE ENDPOINTS REQUESTS
 
@@ -28,7 +29,7 @@ router.post('/vehicles', auth ,async (req, res) => {
 // GET /vehicles?completed=false will get back the incomplete tasks
 // GET /vehicles?limit=10 for ten results &skip=0 for the first ten results 
 // GET /vehicles?sortBy=createdAt_des {field and then order}
- router.get('/vehicles' , auth , async (req, res) => {
+ router.get('/myvehicles' , auth , async (req, res) => {
     const match = {}
     const sort = {}
     
@@ -57,6 +58,16 @@ router.post('/vehicles', auth ,async (req, res) => {
     }
 
    
+})
+
+router.get('/vehicles', async(req,res)=>{
+    try{
+        const vehicles= await Vehicle.find()
+        if(!vehicles) return res.status(404).send()
+        res.send(vehicles)
+    }catch(e){
+        res.status(500).send()
+    }
 })
 
 //GET COUNT OF VEHICLES IN DB
