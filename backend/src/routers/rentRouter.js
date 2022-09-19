@@ -9,9 +9,6 @@ router.post('/rentvehicle', auth , async (req, res) => {
         owner : req.user._id,
         vehicle: req.body
     })
-
-    
-    
     try {
         await rent.save()
         await Vehicle.findOneAndUpdate( {_id: rent.vehicle } , {isAvail: false})
@@ -20,6 +17,7 @@ router.post('/rentvehicle', auth , async (req, res) => {
         res.status(400).send(e)
     }
 })
+
 
 
 

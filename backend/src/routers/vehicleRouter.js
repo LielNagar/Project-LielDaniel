@@ -23,6 +23,8 @@ router.post('/vehicles', auth ,async (req, res) => {
  })
 
 
+
+
 // GET ALL USER VEHICLES LIST ROUTE
 
 // SOME OPTIONS
@@ -60,14 +62,16 @@ router.post('/vehicles', auth ,async (req, res) => {
    
 })
 
-router.get('/vehicles', async(req,res)=>{
+router.get('/vehicles', async(req,res) => {
+
     try{
-        const vehicles= await Vehicle.find()
+        const vehicles = await Vehicle.find(req.query)
         if(!vehicles) return res.status(404).send()
         res.send(vehicles)
-    }catch(e){
+    } catch(e){
         res.status(500).send()
     }
+
 })
 
 //GET COUNT OF VEHICLES IN DB
