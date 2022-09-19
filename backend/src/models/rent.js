@@ -1,28 +1,19 @@
-// const mongoose= require('mongoose')
-// const validator= require('validator')
+const mongoose = require('mongoose')
 
+const rentSchema = new mongoose.Schema({
+    vehicle: {
+        type : String,
+        required: true,
+    },
+    owner : {
+        type: String,
+        required: true
+    }
 
-// const rentSchema = new mongoose.Schema({
-//     "startDate" : {
-//         type: Date,
-//         required: true
-//     },
-
-//     "endDate" : {
-//         type: Date,
-//         required: true
-//     },
-
-//     "price" : {
-//         type: Number,
-//         required: true
-//     }
-// })
+})
 
 
 
+const rentVehicle = mongoose.model('rentVehicle', rentSchema)
 
-
-// const rentCar = mongoose.model('rentCar', rentSchema)
-
-// module.exports = rentCar
+module.exports = rentVehicle
