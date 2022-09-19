@@ -29,7 +29,7 @@ export default class AllVehicles extends React.Component{
             }).then((response)=>{
                 let vehicles=response.data;
                 vehicles = vehicles.filter((vehicle) => {
-                    return vehicle.isAvail == true
+                    return vehicle.isAvail === true
                 })
                 this.setState({vehicles});  
             }).catch((error)=>{
@@ -37,10 +37,19 @@ export default class AllVehicles extends React.Component{
             });
         }
         else{
-
+            const vehicles= JSON.parse(localStorage.getItem('VehiclesAvail'));
+            this.setState({vehicles});
         }
     };
     render(){
+        if(this.state.vehicles.length===0){
+            return(
+                <div>
+                    <p>No Vehicles Avail IN DB</p>
+                </div>
+            );
+        }
+        
         return(
            <div>
            {

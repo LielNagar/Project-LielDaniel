@@ -1,7 +1,43 @@
 import axios from "axios";
 import React from "react";
+import Swal from "sweetalert2";
+
 
 async function Submit(_id){
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+      })
+
+      swalWithBootstrapButtons.fire({
+        title: 'Are you sure?',
+        html: '<p>adssad</p>',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+          swalWithBootstrapButtons.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+          )
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            'Cancelled',
+            'Your imaginary file is safe :)',
+            'error'
+          )
+        }
+      })
     axios.post('http://localhost:4000/rentvehicle',{
         _id
     },{
@@ -11,6 +47,7 @@ async function Submit(_id){
     }).then((response)=>{
         console.log(response);
     }).catch((error)=>{
+        console.log('formsad')
         console.log(error);
     });
 }

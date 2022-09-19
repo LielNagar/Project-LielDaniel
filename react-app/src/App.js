@@ -23,7 +23,7 @@ function App() {
           <Route exact path="/Login" element={<LoginPage/>}></Route>
           <Route exact path="/Profile" element={<Profile/>}></Route>
           <Route exact path="/List" element={<ListCar/>}></Route>
-          <Route exact path="/Results"/>
+          <Route exact path="/Results" element={<AllVehicles result={true}/>}></Route>
         </Routes>
         <Footer/>
       </div>

@@ -26,7 +26,8 @@ function Submit(){
   else params={AC,blueTooth,GPS,manufacturer,gear};
   console.log(params);
   axios.get('http://localhost:4000/vehicles',{params}).then((response)=>{
-    //window.location.href='/Results';
+    localStorage.setItem('VehiclesAvail',JSON.stringify(response.data))
+    window.location.href='/Results';
     console.log(response);
   }).catch((error)=>{
     console.log(error);
