@@ -28,6 +28,7 @@ export default class AllVehicles extends React.Component{
                 }
             }).then((response)=>{
                 const vehicles=response.data;
+                console.log(vehicles);
                 this.setState({vehicles});
             }).catch((error)=>{
                 console.log(error);
@@ -42,7 +43,7 @@ export default class AllVehicles extends React.Component{
            <div>
            {
             this.state.vehicles.map((vehicle)=>{
-                return <Vehicle key={vehicle.licensePlate} description={vehicle.description}
+                return <Vehicle key={vehicle.licensePlate} _id={vehicle._id} description={vehicle.description}
                  licensePlate={vehicle.licensePlate} manufacturer={vehicle.manufacturer} model= {vehicle.model}/>
             })
            }

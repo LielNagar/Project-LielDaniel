@@ -1,4 +1,19 @@
+import axios from "axios";
 import React from "react";
+
+async function Submit(_id){
+    axios.post('http://localhost:4000/rentvehicle',{
+        _id
+    },{
+        headers:{
+            Authorization: 'Bearer '+ JSON.parse(localStorage.getItem('Token'))
+        }
+    }).then((response)=>{
+        console.log(response);
+    }).catch((error)=>{
+        console.log(error);
+    });
+}
 
 export default function Vehicle(props){
     return(
@@ -21,7 +36,7 @@ export default function Vehicle(props){
                     <td>{props.licensePlate}</td>
                     <td>{props.manufacturer}</td>
                     <td>{props.model}</td>
-                    <td><button>Rent Me!</button></td>
+                    <td><button onSubmit={Submit(props._id)}>Rent Me!</button></td>
                 </tr>
             </table>
         </div>
