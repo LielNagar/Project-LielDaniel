@@ -28,8 +28,10 @@ export default class AllVehicles extends React.Component{
                 }
             }).then((response)=>{
                 const vehicles=response.data;
-                console.log(vehicles);
-                this.setState({vehicles});
+                const avehicles = vehicles.filter((vehicle) => {
+                    return vehicle.isAvail == true
+                })
+                this.setState({avehicles});
             }).catch((error)=>{
                 console.log(error);
             });
