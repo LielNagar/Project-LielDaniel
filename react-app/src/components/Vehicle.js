@@ -36,7 +36,7 @@ export default function Vehicle(props){
                     <td>{props.licensePlate}</td>
                     <td>{props.manufacturer}</td>
                     <td>{props.model}</td>
-                    <td><button onSubmit={Submit(props._id)}>Rent Me!</button></td>
+                    <td><button onClick={()=>Submit(props._id)}>Rent Me!</button></td>
                 </tr>
             </table>
         </div>

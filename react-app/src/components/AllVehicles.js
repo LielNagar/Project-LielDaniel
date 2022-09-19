@@ -28,7 +28,6 @@ export default class AllVehicles extends React.Component{
                 }
             }).then((response)=>{
                 const vehicles=response.data;
-                console.log(vehicles);
                 this.setState({vehicles});
             }).catch((error)=>{
                 console.log(error);
