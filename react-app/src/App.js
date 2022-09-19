@@ -18,11 +18,12 @@ function App() {
         <Header user={user}/>
         <Menu/>
         <Routes>
-          <Route exact path="/" element={<div><IndexFilter/><AllVehicles/></div>}></Route>
+          <Route exact path="/" element={<div><IndexFilter/><AllVehicles result={true}/></div>}></Route>
           <Route exact path="/SignUp" element={<SignUp/>}></Route>
           <Route exact path="/Login" element={<LoginPage/>}></Route>
           <Route exact path="/Profile" element={<Profile/>}></Route>
           <Route exact path="/List" element={<ListCar/>}></Route>
+          <Route exact path="/Results"/>
         </Routes>
         <Footer/>
       </div>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from 'axios';
 
 function Submit(){
-  console.log(document.getElementById('year').value);
+  window.location.href='/Results';
 }
 export default class IndexFilter extends React.Component{
   state={
@@ -24,7 +24,7 @@ export default class IndexFilter extends React.Component{
         <select>
           <option>Select A Manufacturer</option>
           {this.state.manufacturers.map((manufacturer)=>{
-            return <option>{manufacturer}</option>
+            return <option key={manufacturer}>{manufacturer}</option>
           })}
         </select>
         <select>

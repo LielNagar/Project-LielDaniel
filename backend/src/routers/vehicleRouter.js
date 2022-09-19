@@ -59,6 +59,17 @@ router.post('/vehicles', auth ,async (req, res) => {
    
 })
 
+//GET COUNT OF VEHICLES IN DB
+// router.get('/vehicles/count', auth, async(req,res)=>{
+//     try{
+//         const count= await Vehicle.countDocuments()
+//         res.send(count)
+//     }catch(error){
+//         res.status(500).send(error)
+//     }
+    
+// })
+
 // GET SPECIFIC VEHICLE BY ID DATA ROUTE
 
 router.get('/vehicles/:id' , auth , async (req, res) => {
