@@ -3,6 +3,7 @@ const validator = require('validator')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const Vehicle = require('./vehicle')
+const rentVehicle = require('./rent')
 
 
 const userSchema = new mongoose.Schema({
@@ -60,6 +61,12 @@ const userSchema = new mongoose.Schema({
 
 userSchema.virtual('vehicles', {
     ref: 'Vehicle',
+    localField: '_id',
+    foreignField: 'owner'
+})
+
+userSchema.virtual('rents', {
+    ref: 'rentVehicle',
     localField: '_id',
     foreignField: 'owner'
 })

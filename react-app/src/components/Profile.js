@@ -1,12 +1,22 @@
 import React   , {useState} from "react";
 import axios from 'axios';
+import ProfileDetails from "./ProfileDetails";
+import MyLists from "./MyLists";
+import MyRents from "./MyRents";
 
 export default function Profile(){
-    const user= localStorage.getItem('User');
+    const user = JSON.parse(localStorage.getItem('User'));
 
     return(
         <div>
-            {user && <p>{user}</p>}
+            <ProfileDetails name = {user.name} email = {user.email}/>
+            <br>
+            </br>
+            <MyLists user = {user} />
+            <MyRents owner = {user._id} />
         </div>
     );
 }
+
+// <MyLists/>
+// <MyRents/>

@@ -27,11 +27,11 @@ export default class AllVehicles extends React.Component{
                     Authorization: 'Bearer '+ JSON.parse(localStorage.getItem('Token'))
                 }
             }).then((response)=>{
-                const vehicles=response.data;
-                const avehicles = vehicles.filter((vehicle) => {
+                let vehicles=response.data;
+                vehicles = vehicles.filter((vehicle) => {
                     return vehicle.isAvail == true
                 })
-                this.setState({avehicles});
+                this.setState({vehicles});  
             }).catch((error)=>{
                 console.log(error);
             });
@@ -46,7 +46,7 @@ export default class AllVehicles extends React.Component{
            {
             this.state.vehicles.map((vehicle)=>{
                 return <Vehicle key={vehicle.licensePlate} _id={vehicle._id} description={vehicle.description}
-                 licensePlate={vehicle.licensePlate} manufacturer={vehicle.manufacturer} model= {vehicle.model}/>
+                 licensePlate={vehicle.licensePlate} manufacturer={vehicle.manufacturer} model= {vehicle.model} buttonStatus = {true}/>
             })
            }
            </div>
