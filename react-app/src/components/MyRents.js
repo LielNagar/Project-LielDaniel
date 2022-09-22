@@ -13,15 +13,10 @@ export default class MyLists extends React.Component{
                 headers:{
                     Authorization: 'Bearer '+ JSON.parse(localStorage.getItem('Token'))
                 }
-            }).then(async (response)=>{
-                await axios.get('http://localhost:4000/vehicles',{
-                    _id :response.vehicle
-                }).then((response) => {
+            }).then((response) => {
                     let vehicles = response.data
                     this.setState({vehicles});  
-                })
-               
-            }).catch((error)=>{
+                }).catch((error)=>{
                 console.log(error);
             });
       
@@ -29,6 +24,7 @@ export default class MyLists extends React.Component{
     render(){
         return(
            <div>
+           <p>My Rents</p>
            {
             this.state.vehicles.map((vehicle)=>{
                 return <Vehicle key={vehicle.licensePlate} _id={vehicle._id} description={vehicle.description}

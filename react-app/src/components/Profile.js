@@ -6,7 +6,6 @@ import MyRents from "./MyRents";
 
 export default function Profile(){
     const user = JSON.parse(localStorage.getItem('User'));
-    console.log(user);
     return(
         <div>
             <ProfileDetails name = {user.name} email = {user.email}/>

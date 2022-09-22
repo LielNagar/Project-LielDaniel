@@ -104,6 +104,10 @@ const vehicleScheme = new mongoose.Schema({
     },
     carURL:{
         type: String,
+    },
+    listedTo: {
+        type:String,
+        required: false
     }
 },
 {
