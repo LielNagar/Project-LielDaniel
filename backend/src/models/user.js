@@ -123,7 +123,7 @@ userSchema.methods.toJSON = function () {
 
     delete userObject.password
     delete userObject.tokens
-    delete userObject.avatar
+    //delete userObject.avatar // Until I figure how to use it with axios.
     
     return userObject
 }
