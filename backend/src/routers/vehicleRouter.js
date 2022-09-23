@@ -3,7 +3,6 @@ const router = new express.Router()
 const auth = require('../middleware/auth')
 const Vehicle = require('../models/vehicle')
 const mongoose= require('mongoose')
-const { response } = require('express')
 
 // VEHICLE ENDPOINTS REQUESTS
 
@@ -75,15 +74,14 @@ router.get('/vehicles', async(req,res) => {
 })
 
 //GET COUNT OF VEHICLES IN DB
-// router.get('/vehicles/count', auth, async(req,res)=>{
-//     try{
-//         const count= await Vehicle.countDocuments()
-//         res.send(count)
-//     }catch(error){
-//         res.status(500).send(error)
-//     }
-    
-// })
+router.get('/vehicles/count', async(req,res)=>{
+    try{
+        const count= await Vehicle.countDocuments({isAvail:true})
+        res.send({count})
+    }catch(error){
+        res.status(500).send(error)
+    }
+})
 
 // GET SPECIFIC VEHICLE BY ID DATA ROUTE
 
