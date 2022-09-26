@@ -108,6 +108,17 @@ const vehicleScheme = new mongoose.Schema({
     listedTo: {
         type:String,
         required: false
+    },
+    color:{
+        type:String,
+    },
+    location:{
+        type:String,
+        required:true
+    },
+    pricePerDay:{
+        type:Number,
+        required:true
     }
 },
 {
