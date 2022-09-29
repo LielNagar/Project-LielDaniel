@@ -24,6 +24,9 @@ export default class MyLists extends React.Component{
 
         }
     };
+    componentDidUpdate(){
+        this.setState
+    }
     render(){
         return(
            <div>

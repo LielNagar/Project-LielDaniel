@@ -49,6 +49,7 @@ async function Submit(_id , removeButtonFromDB, rentButton , removeRentButton){
         }
     }).then((response)=>{
         console.log(response);
+        return <MyRents/>
     }).catch((error)=>{
         console.log('formsad')
         console.log(error);
