@@ -54,8 +54,7 @@ async function Submit(_id , removeButtonFromDB, rentButton , removeRentButton){
         console.log(error);
     });
     }else if(removeButtonFromDB){
-      axios.delete(`http://localhost:4000/vehicle?_id=${_id}`, {
-      },{
+      axios.delete(`http://localhost:4000/vehicle?_id=${_id}`,{
         headers:{
           Authorization: 'Bearer '+ JSON.parse(localStorage.getItem('Token'))
       }
