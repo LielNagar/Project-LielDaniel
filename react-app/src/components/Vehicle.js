@@ -1,6 +1,7 @@
 import axios from "axios";
 import React from "react";
 import Swal from "sweetalert2";
+import "../styles/style.css";
 
 
 async function Submit(_id , removeButtonFromDB, rentButton , removeRentButton){
@@ -49,7 +50,6 @@ async function Submit(_id , removeButtonFromDB, rentButton , removeRentButton){
         }
     }).then((response)=>{
         console.log(response);
-        return <MyRents/>
     }).catch((error)=>{
         console.log('formsad')
         console.log(error);
@@ -81,31 +81,18 @@ async function Submit(_id , removeButtonFromDB, rentButton , removeRentButton){
 
 export default function Vehicle(props){
     return(
-        <div>
-            <table>
-                <th>
-                    <td>Description</td>
-                </th>
-                <th>
-                    <td>License Plate</td>
-                </th>
-                <th>
-                    <td>Manufacturer</td>
-                </th>
-                <th>
-                    <td>Model</td>
-                </th>
-                <tr>
-                    <td>{props.description}</td>
-                    <td>{props.licensePlate}</td>
-                    <td>{props.manufacturer}</td>
-                    <td>{props.model}</td>
-                    {props.rentButton &&  <td><button onClick={ () => Submit(props._id , props.removeButtonFromDB , props.rentButton , props.removeRentButton)}>Rent Me!</button></td>}
-                    {props.removeButtonFromDB &&  <td><button onClick={ () => Submit(props._id , props.removeButtonFromDB , props.rentButton , props.removeRentButton)}>Remove</button></td>}
-                    {props.removeRentButton &&  <td><button onClick={ () => Submit(props._id , props.removeButtonFromDB , props.rentButton , props.removeRentButton)}>Unrent</button></td>}
-                   
-                </tr>
-            </table>
-        </div>
+    <div class='vehicle'>
+          <h1>{props.manufacturer} {props.model}</h1>
+          <p class="title">{props.description}</p>
+          <p>Vehicle Features</p>
+          {props.AC ?  <span class='carFeatureON'>AC </span> : <span class='carFeatureOFF'>AC </span>}
+          {props.GPS?  <span class='carFeatureON'>GPS </span> : <span class='carFeatureOFF'>GPS </span>}
+          {props.BT ?  <span class='carFeatureON'>BT </span> : <span class='carFeatureOFF'>BT </span>}
+          <p>Engine: {props.engine}</p>
+          <p>Gear: {props.gear}</p>
+          {props.rentButton &&  <p><button onClick={ () => Submit(props._id , props.removeButtonFromDB , props.rentButton , props.removeRentButton)}>Rent Me!</button></p>}
+          {props.removeButtonFromDB &&  <p><button onClick={ () => Submit(props._id , props.removeButtonFromDB , props.rentButton , props.removeRentButton)}>Remove</button></p>}
+          {props.removeRentButton &&  <p><button onClick={ () => Submit(props._id , props.removeButtonFromDB , props.rentButton , props.removeRentButton)}>Unrent</button></p>}
+      </div>
     );
 }

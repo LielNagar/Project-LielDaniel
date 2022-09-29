@@ -1,5 +1,6 @@
 import React from "react";
 import axios from 'axios';
+import "../styles/style.css";
 //import Swal from "sweetalert2";
 
 function Submit(){
@@ -47,7 +48,7 @@ export default class IndexFilter extends React.Component{
   }
   render(){
     return(
-      <div>
+      <div class='indexFilter'>
         <input id='sDate' type='date'></input>
         <input id='eDate' type='date'></input>
         <select id='manufacturer'>
@@ -64,15 +65,13 @@ export default class IndexFilter extends React.Component{
         <input id='year' type='number' min='2000' max={new Date().getFullYear()} placeholder='Year Above'></input>
         <br></br>
         <label>Do you want AC?</label>
-        <input id='AC' type='checkbox'></input>
-        <br></br>
-        <label>Do you want BlutTooth?</label>
-        <input id='BT' type='checkbox'></input>
-        <br></br>
+        <input class='checkboxs' id='AC' type='checkbox'></input>
+        <label>Do you want BlueTooth?</label>
+        <input class='checkboxs' id='BT' type='checkbox'></input>
         <label>Do you want GPS?</label>
-        <input id='GPS' type='checkbox'></input>
+        <input class='checkboxs' id='GPS' type='checkbox'></input>
         <br></br>
-        <button onClick={Submit}>Search!</button>
+        <button id='searchButton' onClick={Submit}>Search!</button>
       </div>
     );
   }

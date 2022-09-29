@@ -60,13 +60,11 @@ export default class AllVehicles extends React.Component{
            <div>
            {
             this.state.vehicles.map((vehicle)=>{
-                return <Vehicle key={vehicle.licensePlate} _id={vehicle._id} description={vehicle.description}
+                return <Vehicle key={vehicle.licensePlate} AC={vehicle.AC} GPS={vehicle.GPS} BT={vehicle.blueTooth} engine={vehicle.engineSize} gear={vehicle.gear} _id={vehicle._id} description={vehicle.description}
                  licensePlate={vehicle.licensePlate} manufacturer={vehicle.manufacturer} model= {vehicle.model} removeRentButton = {false} rentButton = {true} removeButtonFromDB = {false}/>
             })
            }
-           {
-            Array(this.state.numOfVehicles).fill(<p>from jsx. to be filled (links to axios calls with skip and limit to render only few elements)</p>)
-           }
+
            </div>
         );
     }

@@ -59,22 +59,29 @@ function SignUp(){
             return setAge(value);
         }
     }
-
     return(
-        <div>
-            <form>
-                <input id="name" placeholder="Enter name" onChange = {(e) => handleInputChange(e)} value={name} required></input>
-                <input id="password" placeholder="Enter password" onChange = {(e) => handleInputChange(e)} value={password} required></input>
-                <input id="email" placeholder="Enter email" onChange = {(e) => handleInputChange(e)} value={email} required></input>
-                <input id="age" placeholder="Enter age" onChange = {(e) => handleInputChange(e)} value={age}></input>
-                <input type="file" id="file"></input>
-                <button onClick={Submit}>Sign Up</button>
-                <br></br>
-                <p>Already have an account?</p>
-                <Link to='/../Login'>Log In</Link>
+        <div id='id01' class='modal'>
+            <form class='modal-content' action="#">
+                <div class='container'>
+                </div>
             </form>
         </div>
     );
+    // return(
+    //     <div>
+    //         <form>
+    //             <input id="name" placeholder="Enter name" onChange = {(e) => handleInputChange(e)} value={name} required></input>
+    //             <input id="password" placeholder="Enter password" onChange = {(e) => handleInputChange(e)} value={password} required></input>
+    //             <input id="email" placeholder="Enter email" onChange = {(e) => handleInputChange(e)} value={email} required></input>
+    //             <input id="age" placeholder="Enter age" onChange = {(e) => handleInputChange(e)} value={age}></input>
+    //             <input type="file" id="file"></input>
+    //             <button onClick={Submit}>Sign Up</button>
+    //             <br></br>
+    //             <p>Already have an account?</p>
+    //             <Link to='/../Login'>Log In</Link>
+    //         </form>
+    //     </div>
+    // );
 }
 
 export default SignUp;
