@@ -31,7 +31,7 @@ export default class MyLists extends React.Component{
            {
             this.state.vehicles.map((vehicle)=>{
                 return <Vehicle key={vehicle.licensePlate} _id={vehicle._id} description={vehicle.description}
-                 licensePlate={vehicle.licensePlate} manufacturer={vehicle.manufacturer} model= {vehicle.model} buttonStatus = {false}/>
+                 licensePlate={vehicle.licensePlate} manufacturer={vehicle.manufacturer} model= {vehicle.model}  removeRentButton = {false} rentButton = {false} removeButtonFromDB = {true}/>
             })
            }
            </div>

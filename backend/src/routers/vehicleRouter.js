@@ -111,18 +111,15 @@ router.get('/vehicles/details/distinct', async(req,res)=>{
 
 // DELETE A LISTED VEHICLE ROUTE
 
-router.delete('/vehicles/:id', auth, async (req, res) => {
-
+router.delete('/vehicle', async (req, res) => {
     try {
-        const vehicle = await Vehicle.findOneAndDelete({_id: req.params.id, owner: req.user._id})
-
+        const vehicle = await Vehicle.findOneAndDelete({_id : req.query._id})
         if (!vehicle) {
             return res.status(404).send()
         }
-        res.send(vehicle)
+        res.status(200).send(vehicle)
     } catch (e) {
-        res.status(500).send()
+        res.status(400).send(e)
     }
 })
-
 module.exports = router

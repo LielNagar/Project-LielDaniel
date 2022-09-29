@@ -18,6 +18,18 @@ router.post('/rentvehicle', auth , async (req, res) => {
     }
 })
 
+router.patch('/removerent' , auth , async (req, res) => {
+    try {
+        const vehicle = await Vehicle.findOneAndUpdate(req.query._id, {listedTo: undefined , isAvail: true})
+        if (!vehicle) {
+            return res.status(404).send()
+        }
+        res.status(200).send(vehicle)
+    } catch (e) {
+        res.status(400).send(e)
+    }
+})
+
 router.get('/myrents', auth , async (req, res) => {
     try{
         // console.log(req.user._id)
