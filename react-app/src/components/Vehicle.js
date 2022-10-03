@@ -81,13 +81,13 @@ async function Submit(_id , removeButtonFromDB, rentButton , removeRentButton){
 
 export default function Vehicle(props){
     return(
-    <div class='vehicle'>
+    <div className='vehicle'>
           <h1>{props.manufacturer} {props.model}</h1>
-          <p class="title">{props.description}</p>
+          <p className="title">{props.description}</p>
           <p>Vehicle Features</p>
-          {props.AC ?  <span class='carFeatureON'>AC </span> : <span class='carFeatureOFF'>AC </span>}
-          {props.GPS?  <span class='carFeatureON'>GPS </span> : <span class='carFeatureOFF'>GPS </span>}
-          {props.BT ?  <span class='carFeatureON'>BT </span> : <span class='carFeatureOFF'>BT </span>}
+          {props.AC ?  <span className='carFeatureON'>AC </span> : <span className='carFeatureOFF'>AC </span>}
+          {props.GPS?  <span className='carFeatureON'>GPS </span> : <span className='carFeatureOFF'>GPS </span>}
+          {props.BT ?  <span className='carFeatureON'>BT </span> : <span className='carFeatureOFF'>BT </span>}
           <p>Engine: {props.engine}</p>
           <p>Gear: {props.gear}</p>
           {props.rentButton &&  <p><button onClick={ () => Submit(props._id , props.removeButtonFromDB , props.rentButton , props.removeRentButton)}>Rent Me!</button></p>}

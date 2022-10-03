@@ -8,7 +8,7 @@ const Header=(props)=>{
         greeting='Hello '+ user.name+ ',';
     }else greeting='Hello Guest,'
     return(
-        <div class="header">
+        <div className="header">
             <h1>Cars-BnB-Project</h1>
             <h3>{greeting}</h3>
         </div>

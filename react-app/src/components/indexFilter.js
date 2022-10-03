@@ -48,7 +48,7 @@ export default class IndexFilter extends React.Component{
   }
   render(){
     return(
-      <div class='indexFilter'>
+      <div className='indexFilter'>
         <input id='sDate' type='date'></input>
         <input id='eDate' type='date'></input>
         <select id='manufacturer'>
@@ -65,11 +65,11 @@ export default class IndexFilter extends React.Component{
         <input id='year' type='number' min='2000' max={new Date().getFullYear()} placeholder='Year Above'></input>
         <br></br>
         <label>Do you want AC?</label>
-        <input class='checkboxs' id='AC' type='checkbox'></input>
+        <input className='checkboxs' id='AC' type='checkbox'></input>
         <label>Do you want BlueTooth?</label>
-        <input class='checkboxs' id='BT' type='checkbox'></input>
+        <input className='checkboxs' id='BT' type='checkbox'></input>
         <label>Do you want GPS?</label>
-        <input class='checkboxs' id='GPS' type='checkbox'></input>
+        <input className='checkboxs' id='GPS' type='checkbox'></input>
         <br></br>
         <button id='searchButton' onClick={Submit}>Search!</button>
       </div>

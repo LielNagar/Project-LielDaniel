@@ -21,7 +21,7 @@ const Logout=()=>{
 export default function Menu(){
     if(localStorage.getItem('User')){
         return(
-            <div class='menu'>
+            <div className='menu'>
                 <Link to='/'><span>Home</span></Link>
                 <Link to='/Profile'><span>My Profile</span></Link>
                 <Link to='/List'><span>List a car</span></Link>

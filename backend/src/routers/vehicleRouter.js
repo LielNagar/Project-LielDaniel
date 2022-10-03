@@ -60,25 +60,15 @@ router.post('/vehicles', auth ,async (req, res) => {
 })
 
 router.get('/vehicles', async(req,res) => {
-    let skip= parseInt(req.query.skip) || 10
-    let limit= parseInt(req.query.limit) || 4
+    let skip= parseInt(req.query.skip) || 0
+    let limit= parseInt(req.query.limit) || 0
     try{
         const vehicles = await Vehicle.find({}).limit(limit).skip(skip)
-        res.send(vehicles)
+        const count = await Vehicle.countDocuments({isAvail:true})
         if(!vehicles) return res.status(404).send()
-        res.send(vehicles)
+        res.send({vehicles,count})
     } catch(e){
         res.status(500).send()
-    }
-})
-
-//GET COUNT OF VEHICLES IN DB
-router.get('/vehicles/count', async(req,res)=>{
-    try{
-        const count= await Vehicle.countDocuments({isAvail:true})
-        res.send({count})
-    }catch(error){
-        res.status(500).send(error)
     }
 })
 
