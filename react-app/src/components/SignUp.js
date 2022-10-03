@@ -5,17 +5,17 @@ import {Link} from 'react-router-dom';
 
 async function Submit(e){
     e.preventDefault();
+    let email = document.getElementById('email');
+    let name = document.getElementById('name').value;
+    if(!name) name = 'Anonymous';
+    let password = document.getElementById('password');
     let age= document.getElementById('age').value;
-    if(!age) age=0;
-    let formData = new FormData()
-    // formData.append('avatar', selectedImage);
-
+    if(!age) age = 0;
     await axios.post('http://localhost:4000/users',{
-        email: document.getElementById('email').value,
-        password:document.getElementById('password').value,
-        age,
-        name: document.getElementById('name').value,
-        // avatar: formData
+        email: email.value,
+        name,
+        password: password.value,
+        age
     }).then((response)=>{
         if(response.status===201){
             Swal.fire(
@@ -26,7 +26,9 @@ async function Submit(e){
         }
         localStorage.setItem('User',JSON.stringify(response.data.user));
         localStorage.setItem('Token',JSON.stringify(response.data.token));
-        window.location.href='/Profile'; 
+        setTimeout(()=>{
+            window.location.href='/Profile'; 
+        },2000);
     }).catch((error)=>{
         console.log(error);
         if(error.response.data.errmsg){
@@ -35,29 +37,16 @@ async function Submit(e){
                 title: 'Duplicated Value',
                 text: 'This email is taken'});
         }
-        Swal.fire({
-            icon: 'error',
-            title: error.response.data._message,
-            text: error.response.data.message});
+        if(error.response.data.errors.email){
+            email.style.background= '#ff5252';
+            return email.focus();
+        } 
+        if(error.response.data.errors.password){
+            password.style.background='#ff5252';
+            return password.focus();
+        }
     });
 }
-
-
-async function editImg(file){
-    console.log(file);
-    let formData = new FormData()
-    formData.append('avatar', file);
-    await axios.post('http://localhost:4000/users/me/avatar',formData,{
-        headers:{
-            Authorization: 'Bearer '+ JSON.parse(localStorage.getItem('Token'))
-        }
-    }).then((response)=>{
-        console.log(response);
-    }).catch((error)=>{
-        console.log(error);
-    })
-}
-
 
 function SignUp(){
     const [name, setName] = useState(undefined);
@@ -117,35 +106,17 @@ function SignUp(){
                       setSelectedImage(event.target.files[0]);
                     }}
                   />
-
                 <div class="button-form">
-                <button id='submit' onClick={Submit}>Sign Up</button>
-                    
+                <button id='submit' onClick={Submit}>Sign Up</button>  
                     <div id="register">
                         Already have an account ?
                         <br></br>
-                        <a href="#">Login</a>
+                        <Link to='/../Login'>Log In</Link>
                     </div>
                 </div>
-                
             </form>
         </div>   
     );
-    // return(
-    //     <div>
-    //         <form>
-    //             <input id="name" placeholder="Enter name" onChange = {(e) => handleInputChange(e)} value={name} required></input>
-    //             <input id="password" placeholder="Enter password" onChange = {(e) => handleInputChange(e)} value={password} required></input>
-    //             <input id="email" placeholder="Enter email" onChange = {(e) => handleInputChange(e)} value={email} required></input>
-    //             <input id="age" placeholder="Enter age" onChange = {(e) => handleInputChange(e)} value={age}></input>
-    //             <input type="file" id="file"></input>
-    //             
-    //             <br></br>
-    //             <p>Already have an account?</p>
-    //             <Link to='/../Login'>Log In</Link>
-    //         </form>
-    //     </div>
-    // );
 }
 
 export default SignUp;

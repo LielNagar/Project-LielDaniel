@@ -1,5 +1,7 @@
 import React   , {useState} from "react";
 import axios from 'axios';
+import {Link} from 'react-router-dom';
+
 // NEEDS TO PUT SWEETALERT HERE
 async function Submit(e){
     e.preventDefault();
@@ -48,10 +50,9 @@ export default function LoginPage(){
                     
                     <div id="register">
                         Don't have an account ?
-                        <a href="#"> Register</a>
+                        <Link to='/../SignUp'>Sign Up</Link>
                     </div>
                 </div>
-                
             </form>
         </div>
     );
