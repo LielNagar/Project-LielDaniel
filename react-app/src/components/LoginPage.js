@@ -1,6 +1,6 @@
 import React   , {useState} from "react";
 import axios from 'axios';
-
+// NEEDS TO PUT SWEETALERT HERE
 async function Submit(e){
     e.preventDefault();
     await axios.post('http://localhost:4000/users/login',{
@@ -31,11 +31,27 @@ export default function LoginPage(){
     }
 
     return(
-        <div>
+        <div class='login-box'>
+            <h2>Login</h2>
             <form>
-                <input id="email" placeholder="Enter Email" onChange = {(e) => handleInputChange(e)} value={email} required></input>
-                <input id="password" placeholder="Enter Password" onChange = {(e) => handleInputChange(e)} value={password} required></input>
-                <button onClick={Submit}>Login</button>
+                <div class="user-box">
+                    <input id="email" type="text" name="" required  onChange = {(e) => handleInputChange(e)} value={email} ></input>
+                    <label>Email</label>
+                </div>
+                <div class="user-box">
+                    <input id="password" type="text" name="" required   onChange = {(e) => handleInputChange(e)} value={password}></input>
+                    <label>Password</label>
+                </div>    
+
+                <div class="button-form">
+                <button id="submit" onClick={Submit}>Login</button>
+                    
+                    <div id="register">
+                        Don't have an account ?
+                        <a href="#"> Register</a>
+                    </div>
+                </div>
+                
             </form>
         </div>
     );
