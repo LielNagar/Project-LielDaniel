@@ -57,20 +57,19 @@ router.post('/vehicles', auth ,async (req, res) => {
     } catch (e) {
         res.status(500).send()
     }
-
-   
 })
 
 router.get('/vehicles', async(req,res) => {
-
+    let skip= parseInt(req.query.skip) || 0
+    let limit= parseInt(req.query.limit) || 0
     try{
-        const vehicles = await Vehicle.find(req.query)
+        const vehicles = await Vehicle.find({}).limit(limit).skip(skip)
+        res.send(vehicles)
         if(!vehicles) return res.status(404).send()
         res.send(vehicles)
     } catch(e){
         res.status(500).send()
     }
-
 })
 
 //GET COUNT OF VEHICLES IN DB

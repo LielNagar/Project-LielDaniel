@@ -7,13 +7,6 @@ export default class AllVehicles extends React.Component{
         vehicles:[],
         numOfVehicles:0
     };
-    // renderLinks(count){
-    //     let arr=[];
-    //     for(let i=0; i<count; i++){
-    //         arr.push(<p>from renderLinks</p>);
-    //     }
-    //     return arr;
-    // }
     componentDidMount(){
         // *****THIS IS FOR COUNT ALL VEHICLES IN DB TO RENDER WITH LIMIT AND SKIP*******//
         axios.get('http://localhost:4000/vehicles/count',{
@@ -64,7 +57,6 @@ export default class AllVehicles extends React.Component{
                  licensePlate={vehicle.licensePlate} manufacturer={vehicle.manufacturer} model= {vehicle.model} removeRentButton = {false} rentButton = {true} removeButtonFromDB = {false}/>
             })
            }
-
            </div>
         );
     }

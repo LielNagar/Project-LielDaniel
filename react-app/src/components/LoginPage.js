@@ -1,8 +1,8 @@
 import React   , {useState} from "react";
 import axios from 'axios';
 import {Link} from 'react-router-dom';
+import Swal from 'sweetalert2';
 
-// NEEDS TO PUT SWEETALERT HERE
 async function Submit(e){
     e.preventDefault();
     await axios.post('http://localhost:4000/users/login',{
@@ -15,7 +15,12 @@ async function Submit(e){
             localStorage.setItem('Token',JSON.stringify(response.data.token));
             window.location.href="/Profile";
         } 
-    }).catch((error)=>console.log(error));
+    }).catch((error)=>{
+        return Swal.fire({
+            icon: 'error',
+            title: 'Login failed',
+            text: 'Login credentials are incorrect'});
+    });
 }
 
 export default function LoginPage(){
@@ -50,6 +55,7 @@ export default function LoginPage(){
                     
                     <div id="register">
                         Don't have an account ?
+                        <br></br>
                         <Link to='/../SignUp'>Sign Up</Link>
                     </div>
                 </div>
