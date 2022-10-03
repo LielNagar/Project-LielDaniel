@@ -23,14 +23,15 @@ export default class MyLists extends React.Component{
         else{
 
         }
-    };
+    };  
     render(){
         return(
            <div>
+           <p>My Lists</p>
            {
             this.state.vehicles.map((vehicle)=>{
-                return <Vehicle key={vehicle.licensePlate} _id={vehicle._id} description={vehicle.description}
-                 licensePlate={vehicle.licensePlate} manufacturer={vehicle.manufacturer} model= {vehicle.model} buttonStatus = {false}/>
+                return <Vehicle key={vehicle.licensePlate}  AC={vehicle.AC} GPS={vehicle.GPS} BT={vehicle.blueTooth} engine={vehicle.engineSize} gear={vehicle.gear} _id={vehicle._id} description={vehicle.description}
+                 licensePlate={vehicle.licensePlate} manufacturer={vehicle.manufacturer} model= {vehicle.model}  removeRentButton = {false} rentButton = {false} removeButtonFromDB = {true}/>
             })
            }
            </div>

@@ -9,12 +9,13 @@ import Menu from './components/Menu';
 import IndexFilter from './components/IndexFilter';
 import Profile from './components/Profile';
 import AllVehicles from './components/AllVehicles';
+import "./styles/style.css";
 
 function App() {
   const user= localStorage.getItem('User')
   return ( 
     <BrowserRouter>
-      <div>
+      <div class='container'>
         <Header user={user}/>
         <Menu/>
         <Routes>

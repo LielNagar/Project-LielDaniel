@@ -5,13 +5,17 @@ import {Link} from 'react-router-dom';
 
 async function Submit(e){
     e.preventDefault();
+    let email = document.getElementById('email');
+    let name = document.getElementById('name').value;
+    if(!name) name = 'Anonymous';
+    let password = document.getElementById('password');
     let age= document.getElementById('age').value;
-    if(!age) age=0;
+    if(!age) age = 0;
     await axios.post('http://localhost:4000/users',{
-        email: document.getElementById('email').value,
-        password:document.getElementById('password').value,
-        age,
-        name: document.getElementById('name').value
+        email: email.value,
+        name,
+        password: password.value,
+        age
     }).then((response)=>{
         if(response.status===201){
             Swal.fire(
@@ -22,7 +26,9 @@ async function Submit(e){
         }
         localStorage.setItem('User',JSON.stringify(response.data.user));
         localStorage.setItem('Token',JSON.stringify(response.data.token));
-        window.location.href='/Profile'; 
+        setTimeout(()=>{
+            window.location.href='/Profile'; 
+        },2000);
     }).catch((error)=>{
         console.log(error);
         if(error.response.data.errmsg){
@@ -31,10 +37,14 @@ async function Submit(e){
                 title: 'Duplicated Value',
                 text: 'This email is taken'});
         }
-        Swal.fire({
-            icon: 'error',
-            title: error.response.data._message,
-            text: error.response.data.message});
+        if(error.response.data.errors.email){
+            email.style.background= '#ff5252';
+            return email.focus();
+        } 
+        if(error.response.data.errors.password){
+            password.style.background='#ff5252';
+            return password.focus();
+        }
     });
 }
 
@@ -43,7 +53,8 @@ function SignUp(){
     const [password,setPassword] = useState(undefined);
     const [email, setEmail] = useState(undefined);
     const [age,setAge] = useState(undefined);
-    
+    const [selectedImage, setSelectedImage] = useState(null);
+
     const handleInputChange = (e) => {
         const {id , value} = e.target;
         if(id === "name"){
@@ -59,21 +70,52 @@ function SignUp(){
             return setAge(value);
         }
     }
-
+    
     return(
-        <div>
+        <div class='login-box'>
+            <h2>Sign Up</h2>
             <form>
-                <input id="name" placeholder="Enter name" onChange = {(e) => handleInputChange(e)} value={name} required></input>
-                <input id="password" placeholder="Enter password" onChange = {(e) => handleInputChange(e)} value={password} required></input>
-                <input id="email" placeholder="Enter email" onChange = {(e) => handleInputChange(e)} value={email} required></input>
-                <input id="age" placeholder="Enter age" onChange = {(e) => handleInputChange(e)} value={age}></input>
-                <input type="file" id="file"></input>
-                <button onClick={Submit}>Sign Up</button>
-                <br></br>
-                <p>Already have an account?</p>
-                <Link to='/../Login'>Log In</Link>
+                <div class="user-box">
+                    <input id="email" type="text" name="" required onChange = {(e) => handleInputChange(e)} value={email} ></input>
+                    <label>Email</label>
+                </div>
+                <div class="user-box">
+                    <input id="password" type="text" name="" required  onChange = {(e) => handleInputChange(e)} value={password}></input>
+                    <label>Password</label>
+                </div>    
+                <div class="user-box">
+                    <input id="name" type="text" name="" required  onChange = {(e) => handleInputChange(e)} value={name} ></input>
+                    <label>Fullname</label>
+                </div>
+                <div class="user-box">
+                     <input id="age" type="text" name="" required  onChange = {(e) => handleInputChange(e)} value={age}></input>
+                     <label>Age</label>
+                </div>    
+                {selectedImage && (
+                    <div>
+                    <img id='profilePic' alt="not found" width={"100px"} src={URL.createObjectURL(selectedImage)} />
+                    </div>
+                  )}
+                  <br />
+                  <br /> 
+                  <input
+                    type="file"
+                    name="myImage"
+                    onChange={(event) => {
+                      console.log(event.target.files[0]);
+                      setSelectedImage(event.target.files[0]);
+                    }}
+                  />
+                <div class="button-form">
+                <button id='submit' onClick={Submit}>Sign Up</button>  
+                    <div id="register">
+                        Already have an account ?
+                        <br></br>
+                        <Link to='/../Login'>Log In</Link>
+                    </div>
+                </div>
             </form>
-        </div>
+        </div>   
     );
 }
 

@@ -3,7 +3,6 @@ const router = new express.Router()
 const auth = require('../middleware/auth')
 const Vehicle = require('../models/vehicle')
 const mongoose= require('mongoose')
-const { response } = require('express')
 
 // VEHICLE ENDPOINTS REQUESTS
 
@@ -75,15 +74,14 @@ router.get('/vehicles', async(req,res) => {
 })
 
 //GET COUNT OF VEHICLES IN DB
-// router.get('/vehicles/count', auth, async(req,res)=>{
-//     try{
-//         const count= await Vehicle.countDocuments()
-//         res.send(count)
-//     }catch(error){
-//         res.status(500).send(error)
-//     }
-    
-// })
+router.get('/vehicles/count', async(req,res)=>{
+    try{
+        const count= await Vehicle.countDocuments({isAvail:true})
+        res.send({count})
+    }catch(error){
+        res.status(500).send(error)
+    }
+})
 
 // GET SPECIFIC VEHICLE BY ID DATA ROUTE
 
@@ -113,18 +111,15 @@ router.get('/vehicles/details/distinct', async(req,res)=>{
 
 // DELETE A LISTED VEHICLE ROUTE
 
-router.delete('/vehicles/:id', auth, async (req, res) => {
-
+router.delete('/vehicle', auth , async (req, res) => {
     try {
-        const vehicle = await Vehicle.findOneAndDelete({_id: req.params.id, owner: req.user._id})
-
+        const vehicle = await Vehicle.findOneAndDelete({_id : req.query._id})
         if (!vehicle) {
             return res.status(404).send()
         }
-        res.send(vehicle)
+        res.status(200).send(vehicle)
     } catch (e) {
-        res.status(500).send()
+        res.status(400).send(e)
     }
 })
-
 module.exports = router

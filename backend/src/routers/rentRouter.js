@@ -11,8 +11,20 @@ router.post('/rentvehicle', auth , async (req, res) => {
     })
     try {
         await rent.save()
-        await Vehicle.findOneAndUpdate( {_id: rent.vehicle } , {isAvail: false})
+        await Vehicle.findOneAndUpdate( {_id: rent.vehicle } , {listedTo:req.user._id , isAvail: false})
         res.status(201).send(rent)
+    } catch (e) {
+        res.status(400).send(e)
+    }
+})
+
+router.patch('/removerent' , auth , async (req, res) => {
+    try {
+        const vehicle = await Vehicle.findOneAndUpdate(req.query._id, {listedTo: undefined , isAvail: true})
+        if (!vehicle) {
+            return res.status(404).send()
+        }
+        res.status(200).send(vehicle)
     } catch (e) {
         res.status(400).send(e)
     }
@@ -20,9 +32,11 @@ router.post('/rentvehicle', auth , async (req, res) => {
 
 router.get('/myrents', auth , async (req, res) => {
     try{
-        const rents = await rentVehicle.find({owner : req.user._id})
-        if(!rents) return res.status(404).send()
-        res.send(rents)
+        // console.log(req.user._id)
+        // const rents = await rentVehicle.find({owner : req.user._id})
+        const vehicles = await Vehicle.find({listedTo : req.user._id})
+        if (!vehicles) return res.status(404).send()
+        res.send(vehicles)
     } catch(e){
         res.status(500).send()
     }
