@@ -9,31 +9,32 @@ export default class AllVehicles extends React.Component{
     };
     componentDidMount(){
         // *****THIS IS FOR COUNT ALL VEHICLES IN DB TO RENDER WITH LIMIT AND SKIP*******//
-        axios.get('http://localhost:4000/vehicles/count',{
-            headers:{
-                Authorization: 'Bearer '+ JSON.parse(localStorage.getItem('Token'))
-            }
-        }).then((response)=>{
-            this.setState({
-                numOfVehicles: response.data.count
-            });
-        }).catch((error)=>{
-            console.log(error);
-        });
+        // axios.get('http://localhost:4000/vehicles/count',{
+        //     headers:{
+        //         Authorization: 'Bearer '+ JSON.parse(localStorage.getItem('Token'))
+        //     }
+        // }).then((response)=>{
+        //     this.setState({
+        //         numOfVehicles: response.data.count
+        //     });
+        // }).catch((error)=>{
+        //     console.log(error);
+        // });
         if(!this.props.result){
-            axios.get('http://localhost:4000/vehicles',{
-                headers:{
-                    Authorization: 'Bearer '+ JSON.parse(localStorage.getItem('Token'))
-                }
-            }).then((response)=>{
-                let vehicles=response.data;
-                vehicles = vehicles.filter((vehicle) => {
-                    return vehicle.isAvail === true
-                })
-                this.setState({vehicles});  
-            }).catch((error)=>{
-                console.log(error);
-            });
+            console.log(this.props.vehicles)
+            // axios.get('http://localhost:4000/vehicles',{
+            //     headers:{
+            //         Authorization: 'Bearer '+ JSON.parse(localStorage.getItem('Token'))
+            //     }
+            // }).then((response)=>{
+            //     let vehicles=response.data;
+            //     vehicles = vehicles.filter((vehicle) => {
+            //         return vehicle.isAvail === true
+            //     })
+            //     this.setState({vehicles});  
+            // }).catch((error)=>{
+            //     console.log(error);
+            // });
         }
         else{
             const vehicles= JSON.parse(localStorage.getItem('VehiclesAvail'));

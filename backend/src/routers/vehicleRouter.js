@@ -60,8 +60,8 @@ router.post('/vehicles', auth ,async (req, res) => {
 })
 
 router.get('/vehicles', async(req,res) => {
-    let skip= parseInt(req.query.skip) || 0
-    let limit= parseInt(req.query.limit) || 0
+    let skip= parseInt(req.query.skip) || 10
+    let limit= parseInt(req.query.limit) || 4
     try{
         const vehicles = await Vehicle.find({}).limit(limit).skip(skip)
         res.send(vehicles)
