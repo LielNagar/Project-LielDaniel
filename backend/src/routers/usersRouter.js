@@ -4,13 +4,26 @@ const auth = require('../middleware/auth')
 const User = require('../models/user')
 const multer = require('multer')
 const sharp = require('sharp')
-
 // USERS ENDPOINTS REQUESTS
+// UPLOAD IMAGE HANDLER
+const upload = multer({
+    limits: {
+        fileSize: 1000000
+    },
+    fileFilter(req, file, cb) {
+        if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+             return cb(new Error('Please upload an image'))
+        }
+        cb(undefined, true)
+    }
+})
 
+//----------POST METHODS----------//
 // SIGN UP ROUTE
-
-router.post('/users' , async (req, res) => {
+router.post('/users' , upload.single('avatar'), async(req, res) => {
+    const buffer = await sharp(req.file.buffer).resize({width: 150, height: 150}).png().toBuffer()
     const user = new User(req.body)
+    user.avatar=buffer
     try {
           await user.save()
           const token = await user.generateAuthToken()
@@ -21,7 +34,6 @@ router.post('/users' , async (req, res) => {
  })
 
  // LOGIN ROUTE
-
 router.post('/users/login', async(req, res) => {
     try {
         const user = await User.findByCredentials(req.body.email, req.body.password)
@@ -33,7 +45,6 @@ router.post('/users/login', async(req, res) => {
 })
 
 // LOGOUT ROUTE
-
 router.post('/users/logout', auth , async (req, res) => {
     try {
         req.user.tokens = req.user.tokens.filter((token) => {
@@ -47,7 +58,6 @@ router.post('/users/logout', auth , async (req, res) => {
 }) 
 
 //LOGOUT ALL TOKENS ROUTE
-
 router.post('/users/logoutAll', auth , async (req, res) => {
     try {
         req.user.tokens = []
@@ -58,22 +68,9 @@ router.post('/users/logoutAll', auth , async (req, res) => {
     }
 })
 
-// UPLOAD IMAGE HANDLER
 
-const upload = multer({
-    limits: {
-        fileSize: 1000000
-    },
-    fileFilter(req, file, cb) {
-        if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
-             return cb(new Error('Please upload an image'))
-        }
-        cb(undefined, true)
-    }
-})
 
 // UPLOAD USER AVATAR ROUTE
- 
 router.post('/users/me/avatar' , auth, upload.single('avatar') , async (req, res) => {
     const buffer = await sharp(req.file.buffer).resize({width: 150, height: 150}).png().toBuffer()
     req.user.avatar = buffer
@@ -83,14 +80,13 @@ router.post('/users/me/avatar' , auth, upload.single('avatar') , async (req, res
     res.status(400).send({error: error.message})
 })
 
+//----------GET METHODS----------//
 // GET PROFILE DATA ROUTE
- 
 router.get('/users/me' , auth ,async (req, res) => {
     res.send(req.user)
  })
 
  // GET USER AVATAR ROUTE
-
 router.get('/users/:id/avatar', async (req, res) => {
     try {
         const user = await User.findById(req.params.id)
@@ -104,8 +100,8 @@ router.get('/users/:id/avatar', async (req, res) => {
     }
 })
  
+//----------PATCH METHODS----------//
 // EDIT USER DATA ROUTE
- 
 router.patch('/users/me', auth ,async (req, res) => {
      const updates = Object.keys(req.body)
      const allowedUpdates = ['name', 'email', 'password', 'age']
@@ -124,8 +120,8 @@ router.patch('/users/me', auth ,async (req, res) => {
      }
  })
 
+ //----------DELETE METHODS----------//
  // REMOVE USER FROM DATA ROUTE
- 
 router.delete('/users/me', auth , async (req, res) => {
      try {
         await req.user.remove()
@@ -136,7 +132,6 @@ router.delete('/users/me', auth , async (req, res) => {
  })
 
 // DELETE USER AVATAR ROUTE
-
 router.delete('/users/me/avatar' ,auth , async (req, res) => {
         req.user.avatar = undefined
         await req.user.save()

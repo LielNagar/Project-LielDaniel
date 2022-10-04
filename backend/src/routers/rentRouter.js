@@ -4,6 +4,7 @@ const router= new express.Router()
 const auth = require('../middleware/auth')
 const Vehicle = require('../models/vehicle')
 
+//----------POST METHODS----------//
 router.post('/rentvehicle', auth , async (req, res) => {
     const rent = new rentVehicle({
         owner : req.user._id,
@@ -18,17 +19,7 @@ router.post('/rentvehicle', auth , async (req, res) => {
     }
 })
 
-router.patch('/removerent' , auth , async (req, res) => {
-    try {
-        const vehicle = await Vehicle.findOneAndUpdate(req.query._id, {listedTo: undefined , isAvail: true})
-        if (!vehicle) {
-            return res.status(404).send()
-        }
-        res.status(200).send(vehicle)
-    } catch (e) {
-        res.status(400).send(e)
-    }
-})
+//----------GET METHODS----------//
 
 router.get('/myrents', auth , async (req, res) => {
     try{
@@ -42,7 +33,18 @@ router.get('/myrents', auth , async (req, res) => {
     }
 })
 
+//----------PATCH METHODS----------//
 
-
+router.patch('/removerent' , auth , async (req, res) => {
+    try {
+        const vehicle = await Vehicle.findOneAndUpdate(req.query._id, {listedTo: undefined , isAvail: true})
+        if (!vehicle) {
+            return res.status(404).send()
+        }
+        res.status(200).send(vehicle)
+    } catch (e) {
+        res.status(400).send(e)
+    }
+})
 
 module.exports = router

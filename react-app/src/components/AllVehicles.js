@@ -1,12 +1,11 @@
 import React from "react";
 import Vehicle from "./Vehicle";
-import axios from "axios";
+//import axios from "axios";
 import AppPagination from "./AppPagination";
 
 export default class AllVehicles extends React.Component{
     state={
-        vehicles:[],
-        numOfVehicles:0
+        vehicles:[]
     };
     // componentDidMount(){
     //     // *****THIS IS FOR COUNT ALL VEHICLES IN DB TO RENDER WITH LIMIT AND SKIP*******//
@@ -43,14 +42,6 @@ export default class AllVehicles extends React.Component{
     //     }
     //};
     render(){
-        // if(this.state.numOfVehicles === 0){
-        //     return(
-        //         <div>
-        //             <p>No Vehicles Avail IN DB</p>
-        //             <AppPagination setVehicle={((vehicle)=> this.setState(vehicle))}/>
-        //         </div>
-        //     );
-        // }
         return(
            <div>
            {
