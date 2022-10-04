@@ -5,25 +5,11 @@ const User = require('../models/user')
 const multer = require('multer')
 const sharp = require('sharp')
 // USERS ENDPOINTS REQUESTS
-// UPLOAD IMAGE HANDLER
-const upload = multer({
-    limits: {
-        fileSize: 1000000
-    },
-    fileFilter(req, file, cb) {
-        if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
-             return cb(new Error('Please upload an image'))
-        }
-        cb(undefined, true)
-    }
-})
 
 //----------POST METHODS----------//
 // SIGN UP ROUTE
-router.post('/users' , upload.single('avatar'), async(req, res) => {
-    const buffer = await sharp(req.file.buffer).resize({width: 150, height: 150}).png().toBuffer()
+router.post('/users' , async (req, res) => {
     const user = new User(req.body)
-    user.avatar=buffer
     try {
           await user.save()
           const token = await user.generateAuthToken()
@@ -68,7 +54,18 @@ router.post('/users/logoutAll', auth , async (req, res) => {
     }
 })
 
-
+// UPLOAD IMAGE HANDLER
+const upload = multer({
+    limits: {
+        fileSize: 1000000
+    },
+    fileFilter(req, file, cb) {
+        if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+             return cb(new Error('Please upload an image'))
+        }
+        cb(undefined, true)
+    }
+})
 
 // UPLOAD USER AVATAR ROUTE
 router.post('/users/me/avatar' , auth, upload.single('avatar') , async (req, res) => {
