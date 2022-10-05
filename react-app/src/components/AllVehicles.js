@@ -43,7 +43,7 @@ export default class AllVehicles extends React.Component{
     //};
     render(){
         return(
-           <div>
+           <div class='content'>
            {
             this.state.vehicles.map((vehicle)=>{
                 return <Vehicle key={vehicle.licensePlate} AC={vehicle.AC} GPS={vehicle.GPS} BT={vehicle.blueTooth} engine={vehicle.engineSize} gear={vehicle.gear} _id={vehicle._id} description={vehicle.description}

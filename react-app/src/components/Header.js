@@ -8,8 +8,8 @@ const Header=(props)=>{
         greeting='Hello '+ user.name+ ',';
     }else greeting='Hello Guest,'
     return(
-        <div className="header">
-            <h1>Cars-BnB-Project</h1>
+        <div className="menu">
+            <img src='../styles/GitHub-Mark-120px-plus-350x190.png' class='logo' />
             <h3>{greeting}</h3>
         </div>
     );

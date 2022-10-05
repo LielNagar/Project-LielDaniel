@@ -5,12 +5,65 @@
 
 * {
    box-sizing: border-box;
+   margin: 0;
+   padding: 0;
+   font-family: sans-serif;
 }
 
-body {
+.container{
+    width: 100%;
+    background-image: linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75)),url(istockphoto-504133748-170667a.jpeg);
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    height: 300vh;
+}
+
+
+.body {
    background: white;
    font-family: var(--font-style);
 }
+
+.menu{
+    width: 85%;
+    margin: auto;
+    padding: 35px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.menu ul li{
+    list-style: none;
+    display: inline-block;
+    margin: 0 20px;
+    position: relative;
+}
+
+.menu ul li a Link{
+    list-style: none;
+    color: #fff;
+    text-transform: uppercase;
+
+}
+
+
+.menu ul li::after{
+    content: '';
+    height: 3px;
+    width: 0;
+    background: #009688;
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    transition: 0.5s;
+}
+
+.menu ul li:hover::after{
+    width: 100%;
+}
+
 
 .pagination{
     margin-top: 350px;
@@ -112,38 +165,6 @@ body {
    text-decoration: none;
 }
 
-.header{
-    background-color: aliceblue;
-    padding: 5px;
-    padding-bottom: 0px;
-    margin: 5px;
-    text-align: center;
-    position: relative;
-}
-
-.header h3{
-    text-align: left;
-    padding-left: 10px;
-   
-}
-
-.menu{
-    text-align: center;
-    position: relative;
-    background-color: aliceblue;
-    font-size: large;
-    text-decoration: none;
-}
-
-.menu span{
-    margin-right: 25px;
-    color: brown;
-    text-decoration: none;
-}
-
-a{
-    text-decoration: none; 
-}
 
 .indexFilter{
     text-align: center;
@@ -193,17 +214,12 @@ a{
     
 }
 
-.container{
-    padding-bottom: 60px;
-    height: 1500px;
+.logo{
+    width: 120px;
+    cursor: pointer;
 }
 
 
-.title {
-    color: black;
-    font-size: 18px;
-}
-  
 button {
     border: none;
     outline: 0;
@@ -230,11 +246,6 @@ button {
     width: auto;
 }
   
-a {
-    text-decoration: none;
-    font-size: 22px;
-    color: black;
-}
   
 button:hover, a:hover {
     opacity: 0.7;

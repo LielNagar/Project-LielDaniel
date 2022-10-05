@@ -23,7 +23,7 @@ function App() {
   const user= localStorage.getItem('User');
   return ( 
     <BrowserRouter>
-      <div className='container'>
+      <div class='app' className='container'>
         <Header user={user}/>
         <Menu/>
         <Routes>
