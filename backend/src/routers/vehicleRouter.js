@@ -11,7 +11,7 @@ router.post('/vehicles', auth ,async (req, res) => {
     const vehicle = new Vehicle({
         ...req.body,
     })
-    
+    console.log(vehicle)
     try {
         await vehicle.save()
         res.status(201).send(vehicle)
@@ -27,29 +27,15 @@ router.post('/vehicles', auth ,async (req, res) => {
 // GET /vehicles?limit=10 for ten results &skip=0 for the first ten results 
 // GET /vehicles?sortBy=createdAt_des {field and then order}
  router.get('/myvehicles' , auth , async (req, res) => {
-    const match = {}
-    const sort = {}
-    
-    if (req.query.completed) {
-        match.createdAt = req.query.completed === 'true'
-    }
-
-    if (req.query.sortBy) {
-        const parts = req.query.sortBy.split(':')
-        sort[parts[0]] = parts[1] === 'desc' ? -1 : 1
-    }
+    let skip= parseInt(req.query.skip) || 0
+    let limit= parseInt(req.query.limit) || 12
+    console.log(req.user._id)
 
     try { 
-         await req.user.populate({
-            path: 'vehicles',
-            match,
-            options: {
-                limit: parseInt(req.query.limit),
-                skip: parseInt(req.query.skip),
-                sort
-            }
-         }).execPopulate()
-         res.send(req.user.vehicles)
+        const vehicles = await Vehicle.find({owner:req.user._id}).limit(limit).skip(skip)
+        const count = await Vehicle.countDocuments({owner:req.user._id})
+        if(!vehicles) return res.status(404).send()
+        res.send({vehicles,count})
     } catch (e) {
         res.status(500).send()
     }
@@ -84,10 +70,28 @@ router.get('/vehicles/:id' , auth , async (req, res) => {
 })
 
 //GET DISTINCT MANUFACTURERS
-router.get('/vehicles/details/distinct', async(req,res)=>{
+router.get('/vehicles/details/distinctmanufacturers', async(req,res)=>{
     try{
         const manufacutrers= await Vehicle.distinct("manufacturer")
         res.send(manufacutrers)
+    }catch(error){
+        res.status(404).send(error)
+    }
+})
+
+router.get('/vehicles/details/distinctgears', async(req,res)=>{
+    try{
+        const gears = await Vehicle.distinct("gear")
+        res.send(gears)
+    }catch(error){
+        res.status(404).send(error)
+    }
+})
+
+router.get('/vehicles/details/distinctyears', async(req,res)=>{
+    try{
+        const years = await Vehicle.distinct("year")
+        res.send(years)
     }catch(error){
         res.status(404).send(error)
     }

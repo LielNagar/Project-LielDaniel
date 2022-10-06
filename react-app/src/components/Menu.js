@@ -21,7 +21,7 @@ const Logout=()=>{
 export default function Menu(){
     if(localStorage.getItem('User')){
         return(
-            <div class='menu'>
+            <div className='menu'>
                 <ul>
                 <li><Link to='/'>Home</Link></li>
                 <li><Link to='/Profile'>My Profile</Link></li>
@@ -32,7 +32,7 @@ export default function Menu(){
         );
     }
     return(
-        <div class='menu'>
+        <div className='menu'>
               <ul>
               <li><Link to='/'>Home</Link></li>
               <li><Link to='/SignUp'>Sign up</Link></li>

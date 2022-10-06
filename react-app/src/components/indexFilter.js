@@ -36,42 +36,87 @@ function Submit(){
 }
 export default class IndexFilter extends React.Component{
   state={
-    manufacturers:[]
+    manufacturers:[],
+    gears:[],
+    years:[]
   }
   componentDidMount(){
-    axios.get('http://localhost:4000/vehicles/details/distinct').then((response)=>{
+    axios.get('http://localhost:4000/vehicles/details/distinctmanufacturers').then((response)=>{
       const manufacturers=response.data;
       this.setState({manufacturers});
+      axios.get('http://localhost:4000/vehicles/details/distinctgears').then((response) => {
+        const gears = response.data;
+        this.setState({gears})
+      })
+      axios.get('http://localhost:4000/vehicles/details/distinctyears').then((response) => {
+        const years = response.data;
+        this.setState({years})
+      })
     }).catch((error)=>{
       console.log(error);
     });
   }
   render(){
     return(
-      <div className='indexFilter'>
-        <input id='sDate' type='date'></input>
-        <input id='eDate' type='date'></input>
-        <select id='manufacturer'>
-          <option>Select A Manufacturer</option>
-          {this.state.manufacturers.map((manufacturer)=>{
-            return <option key={manufacturer} id={manufacturer} value={manufacturer}>{manufacturer}</option>
-          })}
-        </select>
-        <select id='gear'>
-          <option>Select Gear Type</option>
-          <option>Auto</option>
-          <option>Manual</option>
-        </select>
-        <input id='year' type='number' min='2000' max={new Date().getFullYear()} placeholder='Year Above'></input>
-        <br></br>
-        <label>Do you want AC?</label>
-        <input className='checkboxs' id='AC' type='checkbox'></input>
-        <label>Do you want BlueTooth?</label>
-        <input className='checkboxs' id='BT' type='checkbox'></input>
-        <label>Do you want GPS?</label>
-        <input className='checkboxs' id='GPS' type='checkbox'></input>
+      <div className='indexfilter'>
+        <h2>Seach by filter</h2>
+          <br/>
+          <form>
+          
+            <label> Pickup Date </label>
+            <input id='sDate' type='date'></input>
+           
+            <br/>
+            <label> Return Date </label>
+            <input id='eDate' type='date'></input>
+            
+            <br/>
+            <br/>
+          
+            <div id='indexfilterselect'>
+            <label>Manufacturer </label>
+            <select id='manufacturer'>
+            <option></option>
+            {this.state.manufacturers.map((manufacturer)=>{
+              return <option key={manufacturer} id={manufacturer} value={manufacturer}>{manufacturer}</option>
+            })}
+            </select>
+            
+            <label> Gear </label>
+            <select id='gear'>
+            <option></option>
+            {this.state.gears.map((gear)=>{
+              return <option key={gear} id={gear} value={gear}>{gear}</option>
+            })}
+            </select>
+            <label> Year  </label>
+            <select id='year'>
+            <option></option>
+            {this.state.years.map((year)=>{
+              return <option key={year} id={year} value={year}>{year}</option>
+            })}
+           </select>
+            </div>
+            <br/>
+            <div className="checkbx">
+            <label> GPS </label>
+            <input className='checkboxs' id='GPS' type='checkbox'></input>
+            <label> BlueTooth </label>
+            <input className='checkboxs' id='BT' type='checkbox'></input>
+            <label> AC </label>
+            <input className='checkboxs' id='AC' type='checkbox'></input>
+            </div>
+            
+          </form>
+
+
+        
+       
+
         <br></br>
         <button id='searchButton' onClick={Submit}>Search!</button>
+        
+        
       </div>
     );
   }
