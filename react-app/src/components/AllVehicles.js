@@ -3,6 +3,7 @@ import Vehicle from "./Vehicle";
 //import axios from "axios";
 import AppPagination from "./AppPagination";
 
+
 export default class AllVehicles extends React.Component{
     state={
         vehicles:[]
@@ -43,14 +44,16 @@ export default class AllVehicles extends React.Component{
     //};
     render(){
         return(
-           <div class='content'>
+           <div className='content'>
+           <h2>Vehicles to Rent</h2>
            {
             this.state.vehicles.map((vehicle)=>{
                 return <Vehicle key={vehicle.licensePlate} AC={vehicle.AC} GPS={vehicle.GPS} BT={vehicle.blueTooth} engine={vehicle.engineSize} gear={vehicle.gear} _id={vehicle._id} description={vehicle.description}
                  licensePlate={vehicle.licensePlate} manufacturer={vehicle.manufacturer} model= {vehicle.model} removeRentButton = {false} rentButton = {true} removeButtonFromDB = {false}/>
             })
            }
-           <AppPagination setVehicle={((vehicle)=> this.setState(vehicle))}/>
+           <AppPagination id='navbarPagination' setVehicle={((vehicle)=> this.setState(vehicle))}/>
+
            </div>
         );
     }

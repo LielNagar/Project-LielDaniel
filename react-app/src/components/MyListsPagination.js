@@ -4,15 +4,18 @@ import axios from 'axios';
 
 const pageSize=12;
 
-export default function AppPagination({setVehicle}){
+export default function MyListsPagination({setVehicle}){
     const [pagination,setPagination]= useState({
         count: 0,
         skip: 0
     });
     
     useEffect(()=>{
-        axios.get(`http://localhost:4000/vehicles?skip=${pagination.skip}&limit=12` , ).then((response)=>{
-            //console.log(response);
+        axios.get(`http://localhost:4000/myvehicles?skip=${pagination.skip}&limit=12` , {
+            headers:{
+                Authorization: 'Bearer '+ JSON.parse(localStorage.getItem('Token'))
+            }
+        }).then((response)=>{
             setPagination({...pagination, count: response.data.count});
             setVehicle({vehicles:response.data.vehicles})
     })},[pagination.skip])

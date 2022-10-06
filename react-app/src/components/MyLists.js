@@ -1,29 +1,15 @@
 import React from "react";
 import axios from "axios";
 import Vehicle from "./Vehicle";
+import {Box,Pagination} from '@mui/material';
+import MyListsPagination from "./MyListsPagination";
 
 export default class MyLists extends React.Component{
     state={
         vehicles:[],
         numOfVehicles:0
     };
-    componentDidMount(){
-        if(!this.props.result){
-            axios.get('http://localhost:4000/myvehicles',{
-                headers:{
-                    Authorization: 'Bearer '+ JSON.parse(localStorage.getItem('Token'))
-                }
-            }).then((response)=>{
-                let vehicles=response.data;
-                this.setState({vehicles});  
-            }).catch((error)=>{
-                console.log(error);
-            });
-        }
-        else{
 
-        }
-    };  
     render(){
         return(
            <div>
@@ -34,6 +20,7 @@ export default class MyLists extends React.Component{
                  licensePlate={vehicle.licensePlate} manufacturer={vehicle.manufacturer} model= {vehicle.model}  removeRentButton = {false} rentButton = {false} removeButtonFromDB = {true}/>
             })
            }
+           <MyListsPagination id='navbarPagination' setVehicle={((vehicle)=> this.setState(vehicle))}/>
            </div>
         );
     }
